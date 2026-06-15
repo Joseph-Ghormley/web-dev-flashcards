@@ -56,7 +56,7 @@ One challenge I encountered was understanding how to use React state to keep tra
 - [React: Responding to Events](https://react.dev/learn/responding-to-events)
 - [React: Passing Data Through Props](https://react.dev/learn/tutorial-tic-tac-toe#passing-data-through-props)
 - [React School: Button UI](https://react.school/ui/button)
-- [CodePath WEB102 Unit 2 PowerPoint: Building an Interactive Frontend](./public/Su26%20WEB%20102%20Unit%202%20%5BS1%5D.pdf)
+- [CodePath WEB102 Unit 2 PowerPoint: Building an Interactive Frontend](https://github.com/Joseph-Ghormley/web-dev-flashcards/blob/2789fc4bd6e244e6284498dfb8716d9fc952738f/Su26%20WEB%20102%20Unit%202%20%5BS1%5D.pdf)
 
 ## License
 

@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(97, 218, 251, 0.35), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(247, 223, 30, 0.25), transparent 30%),
+    linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+.app {
+  min-height: 100vh;
+  text-align: center;
+  padding: 40px 20px;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.description {
+  max-width: 600px;
+  margin: 0 auto 10px;
+  font-size: 18px;
+}
+
+.card-count {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.flashcard {
+  width: 500px;
+  max-width: 90%;
+  min-height: 220px;
+  margin: 0 auto;
+  padding: 30px;
+  background: white;
+  color: #111827;
+  border: 3px solid #1e88e5;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.flashcard h2 {
+  font-size: 28px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 12px 22px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #1e88e5;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1565c0;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.button-row button {
+  width: 55px;
+  height: 45px;
+  padding: 0;
+  font-size: 22px;
+}
+
+.react {
+  border-color: #61dafb;
+  background: #f0fbff;
+}
+
+.javascript {
+  border-color: #f7df1e;
+  background: #fffbe6;
+}
+
+.css {
+  border-color: #264de4;
+  background: #eef3ff;
+}
+
+.git {
+  border-color: #f1502f;
+  background: #fff0ec;
+}
+
+.header-panel {
+  width: fit-content;
+  max-width: 90%;
+  margin: 0 auto 28px;
+  padding: 18px 32px;
+  background: rgba(15, 23, 42, 0.78);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.header-panel h1 {
+  margin-top: 0;
+  color: white;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+.header-panel .card-count {
+  margin-bottom: 0;
+}

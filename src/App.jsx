@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 
-function App() {
-  const cards = [
+const cards = [
   {
     question: 'What is React?',
     answer: 'A JavaScript library for building user interfaces.',
@@ -55,58 +54,98 @@ function App() {
   }
 ]
 
+function App() {
   const [currentCard, setCurrentCard] = useState(0)
   const [showAnswer, setShowAnswer] = useState(false)
+  const [userGuess, setUserGuess] = useState('')
+  const [feedback, setFeedback] = useState('')
 
   function flipCard() {
     setShowAnswer(!showAnswer)
   }
 
-  function getRandomCard() {
-    let randomIndex = Math.floor(Math.random() * cards.length)
-
-    while (randomIndex === currentCard) {
-      randomIndex = Math.floor(Math.random() * cards.length)
+  function getNextCard() {
+    if (currentCard < cards.length - 1) {
+      setCurrentCard(currentCard + 1)
+      setShowAnswer(false)
     }
-
-    setCurrentCard(randomIndex)
-    setShowAnswer(false)
   }
+
   
   function getPreviousCard() {
-  let previousIndex = currentCard - 1
-
-  if (previousIndex < 0) {
-    previousIndex = cards.length - 1
+    if (currentCard > 0) {
+      setCurrentCard(currentCard - 1)
+      setShowAnswer(false)
+    }    
   }
 
-  setCurrentCard(previousIndex)
-  setShowAnswer(false)
+  
+  function handleSubmitGuess(event) {
+    event.preventDefault()
+
+    if (userGuess.trim().toLowerCase() === cards[currentCard].answer.trim().toLowerCase()) {
+      setFeedback('correct')
+    } else {
+      setFeedback('incorrect')
+    }
+  }
+  function getFeedbackMessage() {
+    if (feedback === 'correct') {
+      return <p className="feedback correct">Correct!</p>
+    }
+
+  if (feedback === 'incorrect') {
+    return <p className="feedback incorrect">Incorrect. Try again!</p>
+  }
+
+  return null
 }
+
   return (
-  <div className="app">
-    <div className="header-panel">
-      <h1>Web Dev Flashcards</h1>
+    <div className="app">
+      <div className="header-panel">
+        <h1>Web Dev Flashcards</h1>
 
-      <p className="description">
-        A quick study deck for React, JavaScript, HTML, CSS, and Git basics.
-      </p>
+        <p className="description">
+          A quick study deck for React, JavaScript, HTML, CSS, and Git basics.
+        </p>
 
-      <p className="card-count">Total cards: {cards.length}</p>
+        <p className="card-count">Total cards: {cards.length}</p>
+      </div>
+
+      <div className={`flashcard ${cards[currentCard].category}`} onClick={flipCard}>
+        <h2>
+          {showAnswer ? cards[currentCard].answer : cards[currentCard].question}
+        </h2>
+      </div>
+
+      <form className="guess-form" onSubmit={handleSubmitGuess}>
+        <label htmlFor="guess-input">Enter your guess:</label>
+
+        <input
+          id="guess-input"
+          type="text"
+          value={userGuess}
+          onChange={(event) => setUserGuess(event.target.value)}
+          placeholder="Type your answer here"
+        />
+
+        <button type="submit">Submit Guess</button>
+      </form>
+      
+      {getFeedbackMessage()}
+      
+      <div className="button-row">
+        <button onClick={getPreviousCard} disabled={currentCard === 0}>
+          ←
+        </button>
+
+        <button onClick={getNextCard} disabled={currentCard === cards.length - 1}>
+          →
+        </button>
+      </div>
     </div>
-
-    <div className={`flashcard ${cards[currentCard].category}`} onClick={flipCard}>
-      <h2>
-        {showAnswer ? cards[currentCard].answer : cards[currentCard].question}
-      </h2>
-    </div>
-
-    <div className="button-row">
-      <button onClick={getPreviousCard}>←</button>
-      <button onClick={getRandomCard}>→</button>
-    </div>
-  </div>
- )
+  )
 }
 
 export default App

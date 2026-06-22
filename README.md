@@ -1,62 +1,60 @@
-# Web Development Project 2 - *Web Dev Flashcards*
+# Web Development Project 3 - *Web Dev Flashcards*
 
 Submitted by: **Joseph Ghormley**
 
-This web app: **A React flashcard study app that helps users review web development basics such as React, JavaScript, CSS, GitHub, state, props, and events. Users can click a card to flip between the question and answer, then use the arrow buttons to move through the deck.**
+This web app: **A React flashcard study app for web development concepts. Users can type a guess before revealing the answer, get correct or incorrect feedback, move through cards in order, shuffle the deck, and track their current and longest correct-answer streak.**
 
-Time spent: **4** hours spent in total
+Time spent: **X** hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [x] **The app displays the title of the card set, a short description, and the total number of cards**
-  - [x] Title of card set is displayed
-  - [x] A short description of the card set is displayed
-  - [x] A list of card pairs is created
-  - [x] The total number of cards in the set is displayed
-  - [x] Card set is represented as a list of card pairs
-- [x] **A single card at a time is displayed**
-  - [x] Only one half of the information pair is displayed at a time
-- [x] **Clicking on the card flips the card over, showing the corresponding component of the information pair**
-  - [x] Clicking on a card flips it over, showing the back with corresponding information
-  - [x] Clicking on a flipped card again flips it back, showing the front
-- [x] **Clicking on the next button displays a random new card**
+- [x] **The user can enter their guess into an input box *before* seeing the flipside of the card**
+  - Application features a clearly labeled input box with a submit button where users can type in a guess
+  - Clicking on the submit button with an **incorrect** answer shows visual feedback that it is wrong
+  - Clicking on the submit button with a **correct** answer shows visual feedback that it is correct
+
+- [x] **The user can navigate through an ordered list of cards**
+  - A forward/next button navigates to the next card in a set sequence when clicked
+  - A previous/back button returns to the previous card in the set sequence when clicked
+  - The next and back buttons are disabled at the beginning or end of the list, preventing wrap-around navigation
 
 The following **optional** features are implemented:
 
-- [ ] Cards contain images in addition to or in place of text
-  - [ ] Some or all cards have images in place of or in addition to text
-- [x] Cards have different visual styles such as color based on their category
-  - [x] Cards are styled by category, such as React, JavaScript, CSS, and Git
+- [x] Users can use a shuffle button to randomize the order of the cards
+  - Cards remain in the same sequence unless the shuffle button is clicked
+  - Cards change to a random sequence once the shuffle button is clicked
+
+- [x] A user's answer may be counted as correct even when it is slightly different from the target answer
+  - Answers ignore uppercase/lowercase differences
+  - Answers ignore punctuation differences such as periods, commas, question marks, and exclamation marks
+
+- [x] A counter displays the user's current and longest streak of correct responses
+  - The current counter increments when a user guesses an answer correctly
+  - The current counter resets to 0 when a user guesses an answer incorrectly
+  - A separate counter tracks the longest streak
+
+- [ ] A user can mark a card that they have mastered and have it removed from the pool of displayed cards
 
 The following **additional** features are implemented:
 
-* [x] Added left and right arrow buttons for navigation
-* [x] Added a web-development themed background
-* [x] Added a header panel to make the title and description easier to read
-* [x] Added category-based card colors for better visual organization
+* [x] Cards have different visual styles based on category
+* [x] The guess input and feedback reset when moving to a new card
+* [x] The card can only be flipped after the user submits a guess
+* [x] The guess form is styled in a clean single-line layout
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented required features:
+Here's a walkthrough of implemented user stories:
 
-<img src='public/webpj2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='public/walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with **ScreenToGif**
 
 ## Notes
 
-One challenge I encountered was understanding how to use React state to keep track of which card was currently displayed and whether the card was showing the question or the answer. I also had to make sure the next button showed a random card instead of moving through the cards in a regular order. Another challenge was styling the page so the title, card, and buttons were easy to read against the background.
-
-## Resources
-
-- [Vite Guide](https://vite.dev/guide/)
-- [React useState Hook](https://react.dev/reference/react/useState)
-- [React: Responding to Events](https://react.dev/learn/responding-to-events)
-- [React: Passing Data Through Props](https://react.dev/learn/tutorial-tic-tac-toe#passing-data-through-props)
-- [React School: Button UI](https://react.school/ui/button)
-- [CodePath WEB102 Unit 2 PowerPoint: Building an Interactive Frontend](https://github.com/Joseph-Ghormley/web-dev-flashcards/blob/2789fc4bd6e244e6284498dfb8716d9fc952738f/Su26%20WEB%20102%20Unit%202%20%5BS1%5D.pdf)
+One challenge was managing multiple pieces of React state at the same time, including the current card, the shuffled deck, whether the answer is showing, the user's guess, feedback, and streak counters. Another challenge was making sure the shuffle feature updated the deck without directly mutating the original array.
 
 ## License
 

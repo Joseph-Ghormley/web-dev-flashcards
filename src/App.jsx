@@ -56,18 +56,25 @@ const cards = [
 
 function App() {
   const [currentCard, setCurrentCard] = useState(0)
+  const [deck, setDeck] = useState(cards)
   const [showAnswer, setShowAnswer] = useState(false)
   const [userGuess, setUserGuess] = useState('')
   const [feedback, setFeedback] = useState('')
+  const [currentStreak, setCurrentStreak] = useState(0)
+  const [longestStreak, setLongestStreak] = useState(0)
 
   function flipCard() {
-    setShowAnswer(!showAnswer)
+    if (feedback!== '') {
+      setShowAnswer(!showAnswer)
+    }
   }
 
   function getNextCard() {
-    if (currentCard < cards.length - 1) {
+    if (currentCard < deck.length - 1) {
       setCurrentCard(currentCard + 1)
       setShowAnswer(false)
+      setUserGuess('')
+      setFeedback('')
     }
   }
 
@@ -76,19 +83,53 @@ function App() {
     if (currentCard > 0) {
       setCurrentCard(currentCard - 1)
       setShowAnswer(false)
+      setUserGuess('')
+      setFeedback('')
     }    
   }
 
-  
-  function handleSubmitGuess(event) {
-    event.preventDefault()
+  function shuffleCards() {
+  const shuffledDeck = [...deck]
 
-    if (userGuess.trim().toLowerCase() === cards[currentCard].answer.trim().toLowerCase()) {
-      setFeedback('correct')
-    } else {
-      setFeedback('incorrect')
-    }
+  for (let i = shuffledDeck.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1))
+    const temporaryCard = shuffledDeck[i]
+
+    shuffledDeck[i] = shuffledDeck[randomIndex]
+    shuffledDeck[randomIndex] = temporaryCard
   }
+
+  setDeck(shuffledDeck)
+  setCurrentCard(0)
+  setShowAnswer(false)
+  setUserGuess('')
+  setFeedback('')
+}
+
+  function cleanAnswer(answer) {
+  return answer
+    .trim()
+    .toLowerCase()
+    .replace(/[.,!?]/g, '')
+}
+
+ function handleSubmitGuess(event) {
+  event.preventDefault()
+
+  if (cleanAnswer(userGuess) === cleanAnswer(deck[currentCard].answer)) {
+    setFeedback('correct')
+    setCurrentStreak(currentStreak + 1)
+
+    if (currentStreak + 1 > longestStreak) {
+      setLongestStreak(currentStreak + 1)
+    }
+  } else {
+    setFeedback('incorrect')
+    setCurrentStreak(0)
+  }
+}
+
+
   function getFeedbackMessage() {
     if (feedback === 'correct') {
       return <p className="feedback correct">Correct!</p>
@@ -110,17 +151,21 @@ function App() {
           A quick study deck for React, JavaScript, HTML, CSS, and Git basics.
         </p>
 
-        <p className="card-count">Total cards: {cards.length}</p>
+        <p className="card-count">Total cards: {deck.length}</p>
+
+        <p className="streak-count">
+          Current streak: {currentStreak} | Longest streak: {longestStreak}
+        </p>
       </div>
 
-      <div className={`flashcard ${cards[currentCard].category}`} onClick={flipCard}>
+      <div className={`flashcard ${deck[currentCard].category}`} onClick={flipCard}>
         <h2>
-          {showAnswer ? cards[currentCard].answer : cards[currentCard].question}
+          {showAnswer ? deck[currentCard].answer : deck[currentCard].question}
         </h2>
       </div>
-
+      
       <form className="guess-form" onSubmit={handleSubmitGuess}>
-        <label htmlFor="guess-input">Enter your guess:</label>
+        <label htmlFor="guess-input">Guess the answer here:</label>
 
         <input
           id="guess-input"
@@ -128,19 +173,26 @@ function App() {
           value={userGuess}
           onChange={(event) => setUserGuess(event.target.value)}
           placeholder="Type your answer here"
+          disabled={showAnswer}
         />
 
-        <button type="submit">Submit Guess</button>
+        <button type="submit" disabled={showAnswer}>
+          Submit Guess
+        </button>
       </form>
       
       {getFeedbackMessage()}
-      
+
       <div className="button-row">
         <button onClick={getPreviousCard} disabled={currentCard === 0}>
           ←
         </button>
 
-        <button onClick={getNextCard} disabled={currentCard === cards.length - 1}>
+        <button onClick={shuffleCards}>
+          Shuffle
+        </button>
+
+        <button onClick={getNextCard} disabled={currentCard === deck.length - 1}>
           →
         </button>
       </div>
